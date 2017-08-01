@@ -1,0 +1,110 @@
+{
+  "users": [
+    {
+      "name": "Jorge Baumann",
+      "birthDate": "21/01/88"
+    },
+    {
+      "name": "Jorge F. Baumann",
+      "birthDate": "21/01/88",
+      "alias": "Jorgito"
+    },
+    {
+      "name": "Ángel Aguilar",
+      "birthDate": "21/01/88",
+      "alias": "Tío Ángel"
+    }
+  ],
+  "salidas": [
+    {
+      "date": "29/07/2017",
+      "startHour": "17:30",
+      "returnHour": "22:00",
+      "waterTemp": 14,
+      "temp": 25,
+      "totalCapturas": 32,
+      "comentarios": "Parti el hilo, y me di un 'cañazo' en la cabeza :(",
+      "fotos": [
+        "http://i.imgur.com/ZuDo7uf.png",
+        "http://i.imgur.com/c3l3wkq.gifv"
+      ],
+      "videos": [
+        "https://youtu.be/k4GMpfhHKSg",
+        "https://youtu.be/tPEQVzu569A"
+      ],
+      "tiposDeCapturas": [
+        "Sargo",
+        "Rubio",
+        "Faneca",
+        "Cabra",
+        "Lota"
+      ],
+      "cebo": [
+        "Sardina",
+        "Gambitas congeladas"
+      ],
+      "people": [
+        {
+          "name": "Jorge Baumann",
+          "isFisherman": true,
+          "capturas": 10
+        },
+        {
+          "name": "Angel Aguilar",
+          "isFisherman": true,
+          "capturas": 10,
+          "": {}
+        }
+      ]
+    },
+    {
+      "date": "29/07/2017",
+      "startHour": "17:30",
+      "returnHour": "22:00",
+      "waterTemp": 14,
+      "temp": 25,
+      "totalCapturas": 32,
+      "comentarios": "Me queme las piernas por no usar crema",
+      "fotos": [
+        "http://i.imgur.com/c3l3wkq.gifv"
+      ],
+      "videos": [
+        "https://youtu.be/k4GMpfhHKSg",
+        "https://youtu.be/tPEQVzu569A"
+      ],
+      "tiposDeCapturas": [
+        "Sargo",
+        "Rubio",
+        "Faneca",
+        "Cabra",
+        "Lota"
+      ],
+      "cebo": [
+        "Sardina",
+        "Gambitas congeladas"
+      ],
+      "people": [
+        {
+          "name": "Jorge Baumann",
+          "isFisherman": true,
+          "capturas": 10
+        },
+        {
+          "name": "Angel Aguilar",
+          "isFisherman": true,
+          "capturas": 11
+        },
+        {
+          "name": "Jorge F, Baumann",
+          "isFisherman": true,
+          "capturas": 12
+        },
+        {
+          "name": "Beatriz Aguilar",
+          "isFisherman": false,
+          "capturas": null
+        }
+      ]
+    }
+  ]
+}
