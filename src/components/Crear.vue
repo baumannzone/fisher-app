@@ -15,7 +15,7 @@
 <script>
 
   export default {
-    name: 'dashboard',
+    name: 'crear',
     data() {
       return {
         visible: false,

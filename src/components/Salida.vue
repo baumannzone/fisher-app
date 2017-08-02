@@ -2,13 +2,6 @@
 
   <div class="dashboard">
     <h1>{{ msg }}</h1>
-    <p> Cantidad: {{ cantidad }}</p>
-
-
-    <el-button @click="visible = true">Button</el-button>
-    <el-dialog v-model="visible" title="Hello world">
-      <p>Try Element</p>
-    </el-dialog>
   </div>
 
 </template>
@@ -17,11 +10,11 @@
   import { mapState } from 'vuex';
 
   export default {
-    name: 'Salidas',
+    name: 'salida',
     data() {
       return {
         visible: false,
-        msg: 'Fisher',
+        msg: 'VISTA DE UNA SALIDA de pesca',
       };
     },
     computed: mapState( [ 'user', 'cantidad' ] ),
