@@ -10,16 +10,16 @@ import App from './App';
 import router from './router';
 import store from './store/store';
 
-Vue.use(VueFire);
-Vue.use(ElementUI);
+Vue.use( VueFire );
+Vue.use( ElementUI );
 
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
-new Vue({
+new Vue( {
   el: '#app',
   template: '<App/>',
   components: { App },
   router,
   store,
-});
+} );

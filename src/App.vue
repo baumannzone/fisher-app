@@ -3,13 +3,13 @@
 
     <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
       <el-menu-item index="1">
-        <router-link :to="{ name: 'salidas' }">Salidas</router-link>
+        <router-link :to="{ name: 'salidas' }" exact>Salidas</router-link>
+      </el-menu-item>
+      <el-menu-item index="2">
+        <router-link :to="{ name: 'crear' }" exact>Crear</router-link>
       </el-menu-item>
       <el-menu-item index="3">
-        <router-link :to="{ name: 'crear' }">Crear</router-link>
-      </el-menu-item>
-      <el-menu-item index="3">
-        <router-link :to="{ name: 'estadisticas' }">Estadísticas</router-link>
+        <router-link :to="{ name: 'estadisticas' }" exact>Estadísticas</router-link>
       </el-menu-item>
     </el-menu>
 
