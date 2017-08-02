@@ -1,21 +1,21 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Dashboard from '@/components/Dashboard';
-import Create from '@/components/Create';
+import Salidas from '@/components/Salidas';
+import Crear from '@/components/Crear';
 
-Vue.use(Router);
+Vue.use( Router );
 
-export default new Router({
+export default new Router( {
   routes: [
     {
       path: '/',
-      name: 'Dashboard',
-      component: Dashboard,
+      name: 'Salidas',
+      component: Salidas,
     },
     {
-      path: '/create',
-      name: 'Create',
-      component: Create,
+      path: '/crear',
+      name: 'Crear',
+      component: Crear,
     },
   ],
-});
+} );

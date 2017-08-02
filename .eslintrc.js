@@ -24,6 +24,8 @@ module.exports = {
   },
   // add your custom rules here
   'rules': {
+    "space-in-parens": ["error", "always"],
+    "array-bracket-spacing": ["error", "always"],
     "no-plusplus": 0,
     "no-console": ["error", { allow: ["warn", "error", "debug"] }],
     // don't require .vue extension when importing

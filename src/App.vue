@@ -6,18 +6,6 @@
 </template>
 
 <script>
-//  import Firebase from 'firebase';
-//  const config = {
-//    apiKey: 'AIzaSyAFIXqGSv2sqhKDJDAm-h4ZWUIUfijWSVs',
-//    authDomain: 'fisher-app-db138.firebaseapp.com',
-//    databaseURL: 'https://fisher-app-db138.firebaseio.com',
-//    projectId: 'fisher-app-db138',
-//    storageBucket: 'fisher-app-db138.appspot.com',
-//    messagingSenderId: '869956372168',
-//  };
-//  const app = Firebase.initializeApp(config);
-//  const db = app.database();
-//  const users = db.ref('users');
 
   export default {
     name: 'app',
@@ -32,6 +20,6 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
+    margin-top: 10px;
   }
 </style>
