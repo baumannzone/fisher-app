@@ -24,6 +24,7 @@ module.exports = {
   },
   // add your custom rules here
   'rules': {
+    "no-plusplus": 0,
     "no-console": ["error", { allow: ["warn", "error", "debug"] }],
     // don't require .vue extension when importing
     'import/extensions': ['error', 'always', {

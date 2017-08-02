@@ -15,11 +15,11 @@
 <script>
 
   export default {
-    name: 'createFishing',
+    name: 'dashboard',
     data() {
       return {
         visible: false,
-        msg: 'Dashboard',
+        msg: 'Create',
       };
     },
     methods: {

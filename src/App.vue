@@ -1,14 +1,28 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png" width="100">
+    <img src="./assets/logo.png" width="50">
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app',
-};
+//  import Firebase from 'firebase';
+//  const config = {
+//    apiKey: 'AIzaSyAFIXqGSv2sqhKDJDAm-h4ZWUIUfijWSVs',
+//    authDomain: 'fisher-app-db138.firebaseapp.com',
+//    databaseURL: 'https://fisher-app-db138.firebaseio.com',
+//    projectId: 'fisher-app-db138',
+//    storageBucket: 'fisher-app-db138.appspot.com',
+//    messagingSenderId: '869956372168',
+//  };
+//  const app = Firebase.initializeApp(config);
+//  const db = app.database();
+//  const users = db.ref('users');
+
+  export default {
+    name: 'app',
+  };
+
 </script>
 
 <style>
