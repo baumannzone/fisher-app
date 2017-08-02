@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import axios from 'axios';
 
 Vue.use( Vuex );
 
@@ -34,8 +35,14 @@ const store = new Vuex.Store( {
     cantidad: 0,
   },
   getters: {
+    // Devuelve los usuarios activos
     usuariosActivos: state => state.users.filter( user => user.active ).length,
   },
+  actions: {
+    obtenerSalidas: (context) => {
+
+    },
+  }
 } );
 
 export default store;
