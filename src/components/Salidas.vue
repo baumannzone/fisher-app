@@ -2,6 +2,7 @@
 
   <div class="dashboard">
     <h1>{{ msg }}</h1>
+    <p> cantidad: {{ cantidad }}</p>
   </div>
 
 </template>
