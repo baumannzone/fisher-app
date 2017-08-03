@@ -5,14 +5,14 @@ import VueFire from 'vuefire';
 import ElementUI from 'element-ui';
 
 import 'element-ui/lib/theme-default/index.css';
+import locale from 'element-ui/lib/locale/lang/es';
 
 import App from './App';
 import router from './router';
 import store from './store/store';
 
 Vue.use( VueFire );
-Vue.use( ElementUI );
-
+Vue.use( ElementUI, { locale } );
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */

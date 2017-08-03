@@ -24,6 +24,8 @@ module.exports = {
   },
   // add your custom rules here
   'rules': {
+    "computed-property-spacing": ["error", "always"],
+    "no-unused-vars": ["error", { "args": "none" }],
     "no-param-reassign": ["error", { "props": false }],
     "space-in-parens": ["error", "always"],
     "array-bracket-spacing": ["error", "always"],
