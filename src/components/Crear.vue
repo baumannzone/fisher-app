@@ -2,8 +2,20 @@
 
   <div class="crear">
 
-    <span>location:</span><input type="text" id="txtautocomplete" style="width:300px" placeholder="enter the adress"/>
-    <label id="lblresult"></label>
+    <label>
+      Location:
+      <gmap-autocomplete class="full-width" :value="description" @place_changed="setPlace"></gmap-autocomplete>
+    </label>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <hr>
+    <pre>{{ latLng }}</pre>
 
     <el-row>
       <el-col :xs="24" :sm="24" :md="{span: 20, offset:2}" :lg="{span: 16, offset:4}" :gutter="20">
@@ -88,29 +100,42 @@
 </template>
 
 <script>
-  /* global google:true */
-  import darkSky from '../darksky/main';
 
-  console.debug( darkSky );
+  import Vue from 'vue';
+  import axios from 'axios';
+  import * as VueGoogleMaps from 'vue2-google-maps';
+  import { openWeatherMap } from '../darksky/main';
 
-  function intialize() {
-    const autocomplete = new google.maps.places.Autocomplete( document.getElementById( 'txtautocomplete' ) );
-    google.maps.event.addListener( autocomplete, 'place_changed', () => {
-      const place = autocomplete.getPlace();
-      let location = `Address: ${place.formatted_address} <br/>`;
-      location += `Latitude: ${place.geometry.location.lat()} <br/>`;
-      location += `Longitude: ${place.geometry.location.lng()}`;
-      document.getElementById( 'lblresult' ).innerHTML = location;
-    } );
-  }
+  Vue.use( VueGoogleMaps, {
+    load: {
+      key: 'AIzaSyAFIXqGSv2sqhKDJDAm-h4ZWUIUfijWSVs',
+      libraries: 'geometry,places',
+    },
+  } );
 
-  google.maps.event.addDomListener( window, 'load', intialize );
+  //  console.debug( darkSky );
+
+  //  function intialize() {
+  //    const autocomplete = new google.maps.places.Autocomplete( document.getElementById( 'auto' ) );
+  //    google.maps.event.addListener( autocomplete, 'place_changed', () => {
+  //      const place = autocomplete.getPlace();
+  //      let location;
+  //      location = `Address: ${place.formatted_address} - `;
+  //      location += `Latitude: ${place.geometry.location.lat()} - `;
+  //      location += `Longitude: ${place.geometry.location.lng()}`;
+  //      document.getElementById( 'resultado' ).innerHTML = location;
+  //    } );
+  //  }
+  //
+  //  google.maps.event.addDomListener( window, 'load', intialize );
 
 
   export default {
     name: 'crear',
     data() {
       return {
+        description: 'Getafe',
+        latLng: {},
         msg: 'Crear',
         ruleForm: {
           date: new Date(),
@@ -159,6 +184,26 @@
       };
     },
     methods: {
+      setPlace( place ) {
+        console.debug( place );
+        this.latLng = {
+          lat: place.geometry.location.lat(),
+          lng: place.geometry.location.lng(),
+        };
+        // https://api.darksky.net/forecast/9277ff4e8c9629652ddb0280ffa5d1f9/37.8267,-122.4233?exclude&lang=es
+        // const url = `${darkSky.api}/${darkSky.key}/${this.latLng.lat},${this.latLng.lng}?${darkSky.options}`;
+        // console.debug( url );
+        // axios
+        // .get( url )
+        // .then( data => console.debug( data ) );
+
+        // http://samples.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=b1b15e88fa797225412429c1c50c122a1
+        // api.openweathermap.org/data/2.5/weather?lat=35&lon=139
+        const url = `${openWeatherMap.api}?lat=${this.latLng.lat}&lon=${this.latLng.lng}&appid=${openWeatherMap.key}&units=metric`;
+        axios
+          .get( url )
+          .then( res => console.debug( res ) );
+      },
       submitForm( formName ) {
         this.$refs[ formName ]
           .validate( ( valid ) => {
