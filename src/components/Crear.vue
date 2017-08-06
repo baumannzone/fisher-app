@@ -6,8 +6,7 @@
       Location:
       <gmap-autocomplete class="full-width" :value="city" @place_changed="setPlace"></gmap-autocomplete>
     </label>
-    <hr>
-    <pre>{{ latLng }}</pre>
+    <p>{{ latLng }}</p>
 
     <el-row>
       <el-col :xs="24" :sm="24" :md="{span: 20, offset:2}" :lg="{span: 16, offset:4}" :gutter="20">
@@ -24,8 +23,6 @@
               </el-form-item>
             </el-col>
           </el-form-item>
-
-          <pre>{{ ruleForm.date }}</pre>
 
           <el-form-item label="Hora" required>
             <el-col :xs="24" :sm="11">
@@ -98,8 +95,9 @@
 
   import Vue from 'vue';
   import axios from 'axios';
+  import * as firebase from 'firebase';
   import * as VueGoogleMaps from 'vue2-google-maps';
-  import { darkSky } from '../config/index';
+  import { darkSky, firebaseConfig } from '../config/index';
 
   // Gmaps API
   Vue.use( VueGoogleMaps, {
@@ -121,11 +119,11 @@
           time1: '',
           time2: '',
           totalCapturas: 0,
-          zonaPesca: '',
+          zonaPesca: '4',
           abordo: [],
-          videos: '',
-          fotos: '',
-          comentarios: '',
+          videos: '1',
+          fotos: '2',
+          comentarios: '3',
         },
         rules: {
           date: [
@@ -138,7 +136,7 @@
             { type: 'integer', required: true, message: 'Please set total', trigger: 'change' },
           ],
           abordo: [
-            { type: 'array', required: true, message: 'Please select Activity zone', trigger: 'change' },
+            { type: 'array', required: true, message: 'Please select ppl', trigger: 'change' },
           ],
         },
         users: [
@@ -182,10 +180,14 @@
           .then( data => console.debug( data, url ) );
       },
       submitForm( formName ) {
+        console.debug( this.$refs[ formName ] );
         this.$refs[ formName ]
           .validate( ( valid ) => {
             if ( valid ) {
+              const fbApp = firebase.initializeApp( firebaseConfig );
+              const db = fbApp.database();
               console.debug( 'submit!' );
+              db.ref( 'salidas' ).push( this.ruleForm );
               return true;
             }
             console.debug( 'error submit!!' );
