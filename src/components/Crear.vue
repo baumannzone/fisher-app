@@ -2,6 +2,8 @@
 
   <div class="crear">
 
+    <h1 class="h1">{{ msg }}</h1>
+
     <label>
       Location:
       <gmap-autocomplete class="full-width" :value="city" @place_changed="setPlace"></gmap-autocomplete>
@@ -108,7 +110,7 @@
   } );
 
   export default {
-    name: 'crear',
+    name: 'Crear',
     data() {
       return {
         city: '',
