@@ -2,7 +2,6 @@
 
   <div class="dashboard">
     <h1>{{ msg }}</h1>
-    <p> cantidad: {{ cantidad }}</p>
     <el-table :data="tableData" border style="width: 100%">
       <el-table-column fixed prop="date" label="Fecha" width="120" sortable></el-table-column>
       <el-table-column
@@ -44,7 +43,6 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex';
 
   export default {
     name: 'Salidas',
@@ -92,7 +90,6 @@
         } ],
       };
     },
-    computed: mapState( [ 'user', 'cantidad' ] ),
   };
 
 </script>

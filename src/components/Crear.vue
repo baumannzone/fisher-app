@@ -4,7 +4,7 @@
 
     <label>
       Location:
-      <gmap-autocomplete class="full-width" :value="description" @place_changed="setPlace"></gmap-autocomplete>
+      <gmap-autocomplete class="full-width" :value="city" @place_changed="setPlace"></gmap-autocomplete>
     </label>
     <hr>
     <pre>{{ latLng }}</pre>
@@ -99,7 +99,6 @@
   import Vue from 'vue';
   import axios from 'axios';
   import * as VueGoogleMaps from 'vue2-google-maps';
-  // Weather
   import { darkSky } from '../config/index';
 
   // Gmaps API
@@ -114,7 +113,7 @@
     name: 'crear',
     data() {
       return {
-        description: '',
+        city: '',
         latLng: {},
         msg: 'Crear',
         ruleForm: {
@@ -170,26 +169,17 @@
           lng: place.geometry.location.lng(),
         };
 
-        // https://api.darksky.net/forecast/9277ff4e8c9629652ddb0280ffa5d1f9/37.8267,-122.4233?exclude&lang=es
+        // https://api.darksky.net/forecast/APIKEY/lat,lng?options
+        // https://api.darksky.net/forecast/[key]/[latitude],[longitude],[time]
         const lat = this.latLng.lat;
         const lng = this.latLng.lng;
-        const url = `${darkSky.api}/${darkSky.key}/${lat},${lng}?${darkSky.options}`;
-        console.debug( url );
-        axios
-          .get( url )
-          .then( data => console.debug( data ) );
-
         const format = 'DD/MM/YYYY';
         const date = this.$moment( this.ruleForm.date ).format( format );
-
-        console.debug( 'MOMENT1: ', this.$moment.utc( date, format ).unix() );
-
-        // http://samples.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=b1b15e88fa797225412429c1c50c122a1
-        // api.openweathermap.org/data/2.5/weather?lat=35&lon=139
-//        const url = `${openWeatherMap.api1}?lat=${this.latLng.lat}&lon=${this.latLng.lng}&appid=${openWeatherMap.key}&units=metric`;
-//        axios
-//          .get( url )
-//          .then( res => console.debug( res ) );
+        const timestamp = this.$moment.utc( date, format ).unix();
+        console.debug( 'MOMENT1: ', timestamp );
+        const url = `${darkSky.api}/${darkSky.key}/${lat},${lng},${timestamp}?${darkSky.options}`;
+        axios.get( url )
+          .then( data => console.debug( data, url ) );
       },
       submitForm( formName ) {
         this.$refs[ formName ]

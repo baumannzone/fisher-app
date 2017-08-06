@@ -2,7 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 import ElementUI from 'element-ui';
-// import moment from 'moment';
+import moment from 'moment';
 
 // load element UI css
 import 'element-ui/lib/theme-default/index.css';
@@ -16,7 +16,7 @@ Vue.use( ElementUI, { locale } );
 Vue.config.productionTip = false;
 
 // Moment - this.$moment
-// Object.defineProperty( Vue.prototype, '$moment', { value: moment } );
+Object.defineProperty( Vue.prototype, '$moment', { value: moment } );
 
 /* eslint-disable no-new */
 new Vue( {
