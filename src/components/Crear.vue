@@ -1,18 +1,15 @@
 <template>
 
   <div class="crear">
-
-    <h1 class="h1">{{ msg }}</h1>
-
     <label>
       Location:
       <gmap-autocomplete class="full-width" :value="city" @place_changed="setPlace"></gmap-autocomplete>
     </label>
-    <p>{{ latLng }}</p>
+    <p class="latlng">{{ latLng }}</p>
 
     <el-row>
       <el-col :xs="24" :sm="24" :md="{span: 20, offset:2}" :lg="{span: 16, offset:4}" :gutter="20">
-        <h1>{{ msg }}</h1>
+        <h1 class="h1">{{ msg }}</h1>
 
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
 
