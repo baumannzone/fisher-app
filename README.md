@@ -1,6 +1,9 @@
+[![CircleCI](https://circleci.com/gh/baumannzone/fisher-app.svg?style=svg)](https://circleci.com/gh/baumannzone/fisher-app)
 # fisher-app
 
-> fishing app
+Vue2 App with Firebase.
+
+
 
 ## Build Setup
 
