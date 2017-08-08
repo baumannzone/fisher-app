@@ -33,5 +33,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
+      - run: sudo apt-get install -t jessie-backports openjdk-8-jdk
+
       # run tests!
       - run: npm test
