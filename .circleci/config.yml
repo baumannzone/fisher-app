@@ -33,9 +33,9 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: echo "deb http://http.debian.net/debian jessie-backports main" | sudo tee --append /etc/apt/sources.list
-      - run: sudo apt-get update
-      - run: sudo apt-get install -t jessie-backports openjdk-8-jdk
+      #- run: echo "deb http://http.debian.net/debian jessie-backports main" | sudo tee --append /etc/apt/sources.list
+      #- run: sudo apt-get update
+      #- run: sudo apt-get install -t jessie-backports openjdk-8-jdk
 
       # run tests!
-      - run: npm test
+      - run: npm run test
