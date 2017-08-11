@@ -1,17 +1,23 @@
 <template>
 
   <div class="crear">
-    <label>
-      Location:
-      <gmap-autocomplete class="full-width" :value="city" @place_changed="setPlace"></gmap-autocomplete>
-    </label>
-    <p class="latlng">{{ latLng }}</p>
+    <p class="latlng">{{latLng}}</p>
 
     <el-row>
       <el-col :xs="24" :sm="24" :md="{span: 20, offset:2}" :lg="{span: 16, offset:4}" :gutter="20">
         <h1 class="h1">{{ msg }}</h1>
 
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
+
+          <!-- gmaps -->
+          <div class="el-form-item is-required">
+            <label class="el-form-item__label" style="width: 120px;">Zona de salida</label>
+            <div class="el-form-item__content" style="margin-left: 120px;">
+              <div class="el-input">
+                <gmap-autocomplete class="el-input__inner" :value="city" @place_changed="setPlace"></gmap-autocomplete>
+              </div>
+            </div>
+          </div>
 
           <el-form-item label="Fecha de salida" required>
             <el-col :xs="24" :sm="11">
@@ -49,6 +55,20 @@
                                :max="999"></el-input-number>
             </el-col>
           </el-form-item>
+
+          <el-form-item label="Detalle Captura">
+            <el-switch v-model="crearDetalles"></el-switch>
+          </el-form-item>
+
+          <template v-if="crearDetalles">
+            <div v-for="(captura, index) in detalleCapturas">
+              <el-input v-model="captura.nombre"></el-input>
+              <el-input v-model="captura.peso"></el-input>
+              <el-input v-model="captura.profundidad"></el-input>
+              <hr>
+            </div>
+            hola
+          </template>
 
           <el-form-item label="A bordo" prop="abordo" required>
             <el-col :xs="24" :sm="11">
@@ -135,7 +155,7 @@
             { type: 'integer', required: true, message: 'Please set total', trigger: 'change' },
           ],
           abordo: [
-            { type: 'array', required: true, message: 'Please select ppl', trigger: 'change' },
+            { type: 'array', required: true, trigger: 'change' },
           ],
         },
         users: [
@@ -157,6 +177,21 @@
           step: '00:30',
           end: '23:59',
         },
+        detalleCapturas: [
+          {
+            nombre: 1,
+            profundidad: 2,
+            peso: 3,
+          },
+        ],
+        crearDetalles: false,
+        dynamicValidateForm: {
+          domains: [ {
+            key: 1,
+            value: '',
+          } ],
+        },
+        nuevoDato: 1,
       };
     },
     methods: {
