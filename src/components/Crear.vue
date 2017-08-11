@@ -61,13 +61,13 @@
           </el-form-item>
 
           <template v-if="crearDetalles">
-            <div v-for="(captura, index) in detalleCapturas">
-              <el-input v-model="captura.nombre"></el-input>
-              <el-input v-model="captura.peso"></el-input>
-              <el-input v-model="captura.profundidad"></el-input>
-              <hr>
+
+            <el-form-item>
+
+            </el-form-item>
+            <div v-for="(captura, index) in ruleForm.detalleCapturas">
+              <p> {{ captura }} -> {{ index }} </p>
             </div>
-            hola
           </template>
 
           <el-form-item label="A bordo" prop="abordo" required>
@@ -75,7 +75,6 @@
               <el-select class="full-width" v-model="ruleForm.abordo" allow-create filterable multiple
                          placeholder="Selecciona personal">
                 <el-option v-for="user in users" :key="user.value" :label="user.label" :value="user.value"></el-option>
-              </el-select>
               </el-select>
             </el-col>
           </el-form-item>
@@ -138,6 +137,7 @@
           time1: '',
           time2: '',
           totalCapturas: 0,
+          detalleCapturas: null,
           zonaPesca: '4',
           abordo: [],
           videos: '1',
@@ -177,13 +177,6 @@
           step: '00:30',
           end: '23:59',
         },
-        detalleCapturas: [
-          {
-            nombre: 1,
-            profundidad: 2,
-            peso: 3,
-          },
-        ],
         crearDetalles: false,
         dynamicValidateForm: {
           domains: [ {
