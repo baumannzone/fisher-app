@@ -1,4 +1,5 @@
 [![CircleCI](https://circleci.com/gh/baumannzone/fisher-app.svg?style=svg)](https://circleci.com/gh/baumannzone/fisher-app)
+[![Build Status](https://travis-ci.org/baumannzone/fisher-app.svg?branch=master)](https://travis-ci.org/baumannzone/fisher-app)
 # fisher-app
 
 Vue2 App with Firebase.

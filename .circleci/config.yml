@@ -26,6 +26,8 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
+      - run: npm install
+
       - save_cache:
           paths:
             - node_modules
@@ -35,13 +37,5 @@ jobs:
       - run: sudo apt-get update
       - run: sudo apt-get install -t jessie-backports openjdk-8-jdk
 
-      #- run: sudo su -c 'echo "deb http://deb.debian.org/debian jessie-backports main" >> /etc/apt/sources.list'
-      #- run: |
-         # sudo rm -rf /var/lib/apt/lists/*
-         # sudo apt-get update
-         # sudo apt install -t jessie-backports  openjdk-8-jre-headless ca-certificates-java
-
-       - run: npm install
-
       # run tests!
-      - run: npm run test
+      - run: npm test
