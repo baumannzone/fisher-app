@@ -65,37 +65,75 @@
           </el-form-item>
 
           <el-form-item label="Detalle Captura">
-            <el-switch v-model="crearDetalles" :disabled="isTotalGTZ"></el-switch>
+            <el-switch v-model="crearDetalles" :disabled="isTotalETZ"></el-switch>
           </el-form-item>
 
           <template v-if="crearDetalles">
 
             <el-form-item>
-              <el-input placeholder="Nombre" v-model="captura.nombre"></el-input>
+              <el-input placeholder="* Nombre especie" v-model="captura.nombre"></el-input>
             </el-form-item>
             <el-form-item>
-              <el-input placeholder="Peso" v-model="captura.peso"></el-input>
+              <el-input placeholder="Peso" v-model="captura.peso">
+                <template slot="append">gramos</template>
+              </el-input>
             </el-form-item>
             <el-form-item>
-              <el-input placeholder="Profundidad" v-model="captura.profundidad"></el-input>
+              <el-input placeholder="Profundidad" v-model="captura.profundidad">
+                <template slot="append">metros</template>
+              </el-input>
             </el-form-item>
             <el-form-item>
-              <el-select class="full-width" v-model="captura.quien" clearable placeholder="Quien?">
+              <el-input placeholder="Cebo" v-model="captura.cebo"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-input placeholder="Cómo" v-model="captura.como"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-select class="full-width" v-model="captura.quien" clearable placeholder="* Quien">
                 <el-option v-for="item in ruleForm.abordo" :key="item" :label="item" :value="item"></el-option>
               </el-select>
+              <div v-if="crearDetallesError" class="el-form-item__error">Campos obligatorios (nombre, quien)</div>
             </el-form-item>
 
             <el-form-item>
-              <el-button type="primary" @click.prevent="anadir(captura)" class="full-width">+</el-button>
+              <el-button type="primary" @click.prevent="anadir(captura)" class="full-width">Añadir</el-button>
             </el-form-item>
 
             <el-form-item>
               <hr>
             </el-form-item>
 
-            <div v-for="(captura, index) in ruleForm.detalleCapturas">
-              <p> {{ captura }} -> {{ index }} </p>
-            </div>
+            <el-form-item>
+            <el-table border :data="ruleForm.detalleCapturas" style="width: 100%">
+              <el-table-column type="expand">
+                <template scope="scope">
+                  <ul>
+                    <li>
+                      <b>{{ scope.row.nombre }}</b>
+                      <el-tag>{{ scope.row.peso }}g</el-tag>
+                      <el-tag type="gray">{{ scope.row.profundidad }}m</el-tag>
+                    </li>
+                    <li>Cebo: {{ scope.row.cebo }}</li>
+                    <li>Cómo: {{ scope.row.como }}</li>
+                  </ul>
+                </template>
+              </el-table-column>
+              <el-table-column prop="nombre" label="Nombre"></el-table-column>
+              <el-table-column label="Gramos">
+                <template scope="scope">
+                  <el-tag type="gray">{{ scope.row.peso }}</el-tag>
+                </template>
+              </el-table-column>
+              <el-table-column label="Metros">
+                <template scope="scope">
+                  <el-tag type="gray">{{ scope.row.profundidad }}</el-tag>
+                </template>
+              </el-table-column>
+              <el-table-column prop="quien" label="Quien" min-width="150"></el-table-column>
+            </el-table>
+            </el-form-item>
+
           </template>
 
           <el-form-item label="Zona de pesca" prop="zonaPesca">
@@ -162,7 +200,16 @@
           time1: '',
           time2: '',
           totalCapturas: 0,
-          detalleCapturas: null,
+          detalleCapturas: [
+            {
+              nombre: 'faneca',
+              peso: '300',
+              profundidad: '20',
+              quien: 'Jorge Baumann',
+              cebo: 'lorem ipsum  isuamsd si amet',
+              como: 'a fondo',
+            },
+          ],
           zonaPesca: '',
           abordo: [],
           videos: '',
@@ -203,16 +250,40 @@
           end: '23:59',
         },
         crearDetalles: true,
+        crearDetallesError: false,
       };
     },
     methods: {
       anadir( captura ) {
-        const { nombre, peso, profundidad } = captura;
+        const { nombre, peso, profundidad, quien } = captura;
         console.debug( nombre );
         console.debug( peso );
         console.debug( profundidad );
+        console.debug( quien );
 
-        return !( captura.nombre === null || captura.peso === null || captura.profundidad === null );
+        if ( nombre === null || quien === null ) {
+          this.crearDetallesError = true;
+        }
+        else {
+          this.crearDetallesError = false;
+          const item = {
+            nombre,
+            peso,
+            profundidad,
+            quien,
+          };
+          this.ruleForm.detalleCapturas.push( item );
+          this.captura = {
+            nombre: null,
+            peso: null,
+            profundidad: null,
+            quien: null,
+          };
+          this.$message( {
+            message: 'Captura agregada',
+            type: 'success',
+          } );
+        }
       },
       setPlace( place ) {
         this.latLng = {
@@ -240,7 +311,9 @@
               const fbApp = firebase.initializeApp( firebaseConfig );
               const db = fbApp.database();
               console.debug( 'submit!' );
-              db.ref( 'salidas' ).push( this.ruleForm );
+              db.ref( 'salidas' ).push( this.ruleForm )
+                .then( res => console.debug( res ) );
+              // KrIPzU_PNpKe1NQ8XBD
               return true;
             }
             console.debug( 'error submit!!' );
@@ -252,8 +325,9 @@
       },
     },
     computed: {
-      isTotalGTZ() {
-        return this.ruleForm.totalCapturas === 0;
+      // Equal to 0
+      isTotalETZ() {
+        return this.ruleForm.totalCapturas === 0 || this.ruleForm.abordo.length === 0;
       },
     },
   };
