@@ -7,8 +7,6 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex';
-
   export default {
     name: 'salida',
     data() {
@@ -17,7 +15,6 @@
         msg: 'VISTA DE UNA SALIDA de pesca',
       };
     },
-    computed: mapState( [ 'user', 'cantidad' ] ),
   };
 
 </script>

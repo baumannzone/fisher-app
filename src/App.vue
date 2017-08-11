@@ -13,7 +13,10 @@
       </el-menu-item>
     </el-menu>
 
-    <router-view></router-view>
+
+    <transition name="animt" mode="out-in">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
@@ -51,4 +54,17 @@
   h1 {
     text-align: center
   }
+
+  .animt-enter-active {
+    transition: all .2s ease;
+  }
+  .animt-leave-active {
+    transition: all .2s ease-in;
+  }
+  .animt-enter,
+  .animt-leave-to {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+
 </style>

@@ -312,8 +312,12 @@
               const db = fbApp.database();
               console.debug( 'submit!' );
               db.ref( 'salidas' ).push( this.ruleForm )
-                .then( res => console.debug( res ) );
+                .then( ( res ) => {
+                  this.router.push( { name: 'salida', params: { id: res.key } } );
+                  console.debug( res );
+                } );
               // KrIPzU_PNpKe1NQ8XBD
+
               return true;
             }
             console.debug( 'error submit!!' );
@@ -321,6 +325,7 @@
           } );
       },
       resetForm( formName ) {
+        this.$router.push( { name: 'salida', params: { id: 'KrIPzU_PNpKe1NQ8XBD' } } );
         this.$refs[ formName ].resetFields();
       },
     },
