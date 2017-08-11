@@ -49,27 +49,6 @@
 
           </el-form-item>
 
-          <el-form-item label="Total Capturas" prop="totalCapturas" required>
-            <el-col :xs="24" :sm="11">
-              <el-input-number class="full-width" v-model="ruleForm.totalCapturas" :min="0"
-                               :max="999"></el-input-number>
-            </el-col>
-          </el-form-item>
-
-          <el-form-item label="Detalle Captura">
-            <el-switch v-model="crearDetalles"></el-switch>
-          </el-form-item>
-
-          <template v-if="crearDetalles">
-
-            <el-form-item>
-
-            </el-form-item>
-            <div v-for="(captura, index) in ruleForm.detalleCapturas">
-              <p> {{ captura }} -> {{ index }} </p>
-            </div>
-          </template>
-
           <el-form-item label="A bordo" prop="abordo" required>
             <el-col :xs="24" :sm="11">
               <el-select class="full-width" v-model="ruleForm.abordo" allow-create filterable multiple
@@ -78,6 +57,46 @@
               </el-select>
             </el-col>
           </el-form-item>
+
+          <el-form-item label="Total Capturas" prop="totalCapturas" required>
+            <el-col :xs="24" :sm="11">
+              <el-input-number class="full-width" v-model="ruleForm.totalCapturas" :min="0" :max="999"></el-input-number>
+            </el-col>
+          </el-form-item>
+
+          <el-form-item label="Detalle Captura">
+            <el-switch v-model="crearDetalles" :disabled="isTotalGTZ"></el-switch>
+          </el-form-item>
+
+          <template v-if="crearDetalles">
+
+            <el-form-item>
+              <el-input placeholder="Nombre" v-model="captura.nombre"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-input placeholder="Peso" v-model="captura.peso"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-input placeholder="Profundidad" v-model="captura.profundidad"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-select class="full-width" v-model="captura.quien" clearable placeholder="Quien?">
+                <el-option v-for="item in ruleForm.abordo" :key="item" :label="item" :value="item"></el-option>
+              </el-select>
+            </el-form-item>
+
+            <el-form-item>
+              <el-button type="primary" @click.prevent="anadir(captura)" class="full-width">+</el-button>
+            </el-form-item>
+
+            <el-form-item>
+              <hr>
+            </el-form-item>
+
+            <div v-for="(captura, index) in ruleForm.detalleCapturas">
+              <p> {{ captura }} -> {{ index }} </p>
+            </div>
+          </template>
 
           <el-form-item label="Zona de pesca" prop="zonaPesca">
             <el-input v-model="ruleForm.zonaPesca" placeholder="Nombre de roca, coordenadas, ..."></el-input>
@@ -129,6 +148,12 @@
     name: 'Crear',
     data() {
       return {
+        captura: {
+          nombre: null,
+          peso: null,
+          profundidad: null,
+          quien: null,
+        },
         city: '',
         latLng: null,
         msg: 'Crear',
@@ -138,11 +163,11 @@
           time2: '',
           totalCapturas: 0,
           detalleCapturas: null,
-          zonaPesca: '4',
+          zonaPesca: '',
           abordo: [],
-          videos: '1',
-          fotos: '2',
-          comentarios: '3',
+          videos: '',
+          fotos: '',
+          comentarios: '',
         },
         rules: {
           date: [
@@ -177,17 +202,18 @@
           step: '00:30',
           end: '23:59',
         },
-        crearDetalles: false,
-        dynamicValidateForm: {
-          domains: [ {
-            key: 1,
-            value: '',
-          } ],
-        },
-        nuevoDato: 1,
+        crearDetalles: true,
       };
     },
     methods: {
+      anadir( captura ) {
+        const { nombre, peso, profundidad } = captura;
+        console.debug( nombre );
+        console.debug( peso );
+        console.debug( profundidad );
+
+        return !( captura.nombre === null || captura.peso === null || captura.profundidad === null );
+      },
       setPlace( place ) {
         this.latLng = {
           lat: place.geometry.location.lat(),
@@ -226,8 +252,8 @@
       },
     },
     computed: {
-      usuariosActivos() {
-        return this.$store.getters.usuariosActivos;
+      isTotalGTZ() {
+        return this.ruleForm.totalCapturas === 0;
       },
     },
   };
