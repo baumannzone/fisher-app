@@ -17,7 +17,7 @@ module.exports = {
       .assert.elementCount('table', 6)
       .url('http://localhost:8080/#/crear')
       .assert.containsText('h1', 'Crear')
-      .assert.containsText('.latlng', '{}')
+      .assert.containsText('.latlng', '')
       .end();
   },
 };

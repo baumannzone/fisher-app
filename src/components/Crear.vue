@@ -131,7 +131,7 @@
     data() {
       return {
         city: '',
-        latLng: {},
+        latLng: null,
         msg: 'Crear',
         ruleForm: {
           date: new Date(),
