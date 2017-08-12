@@ -1,3 +1,5 @@
+import * as firebase from 'firebase';
+
 // wheather API
 const darkSky = {
   key: '9277ff4e8c9629652ddb0280ffa5d1f9',
@@ -24,4 +26,7 @@ const firebaseConfig = {
   messagingSenderId: '869956372168',
 };
 
-export { darkSky, openWeatherMap, firebaseConfig };
+const fbApp = firebase.initializeApp( firebaseConfig );
+const db = fbApp.database();
+
+export { darkSky, openWeatherMap, firebaseConfig, db };

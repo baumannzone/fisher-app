@@ -24,7 +24,7 @@
     data() {
       return {
         visible: false,
-        msg: 'VISTA DE UNA SALIDA de pesca',
+        msg: 'EDITAR SALIDA',
         salida: null,
       };
     },

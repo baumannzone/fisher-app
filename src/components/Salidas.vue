@@ -2,50 +2,42 @@
 
   <div class="dashboard">
     <h1>{{ msg }}</h1>
-    <el-table :data="tableData" border style="width: 100%">
-      <el-table-column fixed prop="date" label="Fecha" width="120" sortable></el-table-column>
-      <el-table-column
-        prop="name"
-        label="Hora">
-      </el-table-column>
-      <el-table-column
-        prop="state"
-        label="Total"
-        width="120">
-      </el-table-column>
-      <el-table-column
-        prop="city"
-        label="Temp"
-        width="120">
-      </el-table-column>
-      <el-table-column
-        prop="address"
-        label="Address"
-        width="300">
-      </el-table-column>
-      <el-table-column
-        prop="zip"
-        label="Zip"
-        width="120">
-      </el-table-column>
-      <el-table-column
-        fixed="right"
-        label="Operations"
-        width="120">
+
+    <el-table :data="salidas" style="width: 100%">
+      <el-table-column label="Time1" prop="time1"></el-table-column>
+      <el-table-column label="Time2" prop="time2"></el-table-column>
+      <el-table-column label="Acciones">
         <template scope="scope">
-          <el-button @click="handleClick" type="text" size="small">Detail</el-button>
-          <el-button type="text" size="small">Edit</el-button>
+          <router-link :to="{ name: 'salida', params: { id: scope.row.id } }">Ver</router-link>
+          <router-link :to="{ name: 'editar', params: { id: scope.row.id } }">Editar</router-link>
         </template>
       </el-table-column>
     </el-table>
+
+    <pre> {{ salidas }}</pre>
+
   </div>
 
 </template>
 
 <script>
+  import { db } from '../config/index';
 
   export default {
     name: 'Salidas',
+    mounted() {
+      const salidasRef = db.ref( 'salidas' );
+      salidasRef.on( 'value', ( snapshot ) => {
+        const salidasArr = this.$_( snapshot.val() ) // wrap object so that you can chain lodash methods
+          .mapValues( ( value, id ) => this.$_.merge( {}, value, { id } ) ) // attach id to object
+          .values() // get the values of the result
+          .value(); // unwrap array of objects
+
+        this.salidas = salidasArr;
+        console.debug( salidasArr );
+        this.loading = false;
+      } );
+    },
     methods: {
       handleClick() {
         console.debug( 'click' );
@@ -55,39 +47,7 @@
       return {
         visible: false,
         msg: 'Salidas',
-        tableData: [ {
-          date: '2016-05-03',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-          tag: 'Home',
-        }, {
-          date: '2016-05-02',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-          tag: 'Office',
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-          tag: 'Home',
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-          tag: 'Office',
-        } ],
+        salidas: null,
       };
     },
   };

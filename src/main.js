@@ -3,6 +3,7 @@
 import Vue from 'vue';
 import ElementUI from 'element-ui';
 import moment from 'moment';
+import _ from 'lodash';
 
 // load element UI css
 import 'element-ui/lib/theme-default/index.css';
@@ -17,6 +18,7 @@ Vue.config.productionTip = false;
 
 // Moment - this.$moment
 Object.defineProperty( Vue.prototype, '$moment', { value: moment } );
+Object.defineProperty( Vue.prototype, '$_', { value: _ } );
 
 /* eslint-disable no-new */
 new Vue( {

@@ -13,7 +13,6 @@
       </el-menu-item>
     </el-menu>
 
-
     <transition name="animt" mode="out-in">
       <router-view></router-view>
     </transition>
@@ -24,6 +23,16 @@
 
   export default {
     name: 'app',
+    mounted() {
+      const name = this.$route.name;
+      if ( name === 'crear' ) {
+        this.activeIndex = '2';
+      }
+      else if ( name === 'estadisticas' ) {
+        this.activeIndex = '3';
+      }
+      // By default active index is 1;
+    },
     data() {
       return {
         activeIndex: '1',
@@ -63,7 +72,7 @@
   }
   .animt-enter,
   .animt-leave-to {
-    transform: translateX(20px);
+    transform: translateY(20px);
     opacity: 0;
   }
 

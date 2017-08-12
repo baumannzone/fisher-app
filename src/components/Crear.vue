@@ -1,6 +1,7 @@
 <template>
 
   <div class="crear">
+    <h3> {{ this.$route.name }}</h3>
     <p class="latlng">{{latLng}}</p>
 
     <el-row>
@@ -21,10 +22,10 @@
 
           <el-form-item label="Fecha de salida" required>
             <el-col :xs="24" :sm="11">
-              <el-form-item prop="date">
+              <el-form-item prop="fecha">
                 <el-date-picker class="full-width" type="date" placeholder="Fecha"
                                 format="dd/MM/yyyy"
-                                v-model="ruleForm.date"></el-date-picker>
+                                v-model="ruleForm.fecha"></el-date-picker>
               </el-form-item>
             </el-col>
           </el-form-item>
@@ -170,9 +171,8 @@
 
   import Vue from 'vue';
   import axios from 'axios';
-  import * as firebase from 'firebase';
   import * as VueGoogleMaps from 'vue2-google-maps';
-  import { darkSky, firebaseConfig } from '../config/index';
+  import { darkSky, db } from '../config/index';
 
   // Gmaps API
   Vue.use( VueGoogleMaps, {
@@ -196,7 +196,7 @@
         latLng: null,
         msg: 'Crear',
         ruleForm: {
-          date: new Date(),
+          fecha: null,
           time1: '',
           time2: '',
           totalCapturas: 0,
@@ -217,7 +217,7 @@
           comentarios: '',
         },
         rules: {
-          date: [
+          fecha: [
             { type: 'date', required: true, message: 'Please pick a date', trigger: 'change' },
           ],
           time1: [
@@ -304,20 +304,18 @@
           .then( data => console.debug( data, url ) );
       },
       submitForm( formName ) {
-        console.debug( this.$refs[ formName ] );
         this.$refs[ formName ]
           .validate( ( valid ) => {
             if ( valid ) {
-              const fbApp = firebase.initializeApp( firebaseConfig );
-              const db = fbApp.database();
-              console.debug( 'submit!' );
-              db.ref( 'salidas' ).push( this.ruleForm )
+              console.debug( 'Formulario:' );
+              console.debug( this.ruleForm );
+              const datos = this.ruleForm;
+              db.ref( 'salidas' ).push( datos )
                 .then( ( res ) => {
-                  this.router.push( { name: 'salida', params: { id: res.key } } );
+                  this.$router.push( { name: 'salida', params: { id: res.key } } );
                   console.debug( res );
                 } );
               // KrIPzU_PNpKe1NQ8XBD
-
               return true;
             }
             console.debug( 'error submit!!' );
@@ -325,7 +323,7 @@
           } );
       },
       resetForm( formName ) {
-        this.$router.push( { name: 'salida', params: { id: 'KrIPzU_PNpKe1NQ8XBD' } } );
+        this.$router.push( { name: 'salida', params: { id: '-KrMRoCZmD8ECYP4m6hC' } } );
         this.$refs[ formName ].resetFields();
       },
     },

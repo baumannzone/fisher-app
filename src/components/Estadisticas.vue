@@ -2,12 +2,12 @@
 
   <div class="dashboard">
     <h1>{{ msg }}</h1>
+    <h3> {{ this.$route.name }}</h3>
   </div>
 
 </template>
 
 <script>
-  import { mapState } from 'vuex';
 
   export default {
     name: 'estadisticas',
@@ -16,7 +16,6 @@
         msg: 'Estadisticas',
       };
     },
-    computed: mapState( [ 'user', 'cantidad' ] ),
   };
 
 </script>
