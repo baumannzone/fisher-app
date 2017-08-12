@@ -1,7 +1,7 @@
 <template>
 
   <div class="crear">
-    <h3> {{ this.$route.name }}</h3>
+    <h1> {{ msg }} </h1>
     <p class="latlng">{{latLng}}</p>
 
     <el-row>

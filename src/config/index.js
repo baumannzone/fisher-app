@@ -28,5 +28,7 @@ const firebaseConfig = {
 
 const fbApp = firebase.initializeApp( firebaseConfig );
 const db = fbApp.database();
+const auth = fbApp.auth();
+const provider = new firebase.auth.GoogleAuthProvider();
 
-export { darkSky, openWeatherMap, firebaseConfig, db };
+export { darkSky, openWeatherMap, db, provider, auth };
