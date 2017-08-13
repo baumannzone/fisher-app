@@ -1,6 +1,2 @@
 language: node_js
 node_js: "6.9.5"
-addons:
-  sauce_connect:
-    username: "baumannq"
-    access_key: "b3d3f32d-86de-4e7f-a520-64c4e89c8652"

@@ -6,7 +6,6 @@
 
     <el-row>
       <el-col :xs="24" :sm="24" :md="{span: 20, offset:2}" :lg="{span: 16, offset:4}" :gutter="20">
-        <h1 class="h1">{{ msg }}</h1>
 
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
 
@@ -307,15 +306,13 @@
         this.$refs[ formName ]
           .validate( ( valid ) => {
             if ( valid ) {
-              console.debug( 'Formulario:' );
+              // Convert date to milliseconds
+              this.ruleForm.fecha = this.$moment( this.ruleForm.fecha ).valueOf();
               console.debug( this.ruleForm );
-              const datos = this.ruleForm;
-              db.ref( 'salidas' ).push( datos )
+              db.ref( 'salidas' ).push( this.ruleForm )
                 .then( ( res ) => {
                   this.$router.push( { name: 'salida', params: { id: res.key } } );
-                  console.debug( res );
                 } );
-              // KrIPzU_PNpKe1NQ8XBD
               return true;
             }
             console.debug( 'error submit!!' );

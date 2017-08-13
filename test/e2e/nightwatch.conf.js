@@ -1,5 +1,5 @@
-require('babel-register');
-const config = require('../../config');
+require('babel-register')
+var config = require('../../config')
 
 // http://nightwatchjs.org/gettingstarted#settings-file
 module.exports = {
@@ -8,10 +8,10 @@ module.exports = {
   custom_assertions_path: ['test/e2e/custom-assertions'],
 
   selenium: {
-    start_process: false,
+    start_process: true,
     server_path: require('selenium-server').path,
-    host: 'ondemand.saucelabs.com',
-    port: 80,
+    host: '127.0.0.1',
+    port: 4444,
     cli_args: {
       'webdriver.chrome.driver': require('chromedriver').path
     }

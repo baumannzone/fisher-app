@@ -4,9 +4,10 @@
     <h1>{{ msg }}</h1>
 
     <el-table :data="salidas" border style="width: 100%">
-      <el-table-column label="Fecha" prop="fecha" fixed></el-table-column>
+      <el-table-column label="Fecha" prop="fechaFormato"fixed sortable width="100" >
+      </el-table-column>
       <el-table-column label="Total" prop="totalCapturas"></el-table-column>
-      <el-table-column label="Media">
+      <el-table-column label="Media" width="100">
         <template scope="scope">
           <div class="center">
             <span v-if="scope.row.fotos">
@@ -24,7 +25,7 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="Acciones">
+      <el-table-column label="Acciones" width="100">
         <template scope="scope">
           <div class="center icon-dark">
             <el-tag type="gray">
@@ -52,12 +53,25 @@
   export default {
     name: 'Salidas',
     mounted() {
+      console.debug( this.$moment( 1318874398806 ).format( 'DD/MM/YY' ) );
+      console.debug( this.$moment( '17/10/11', 'DD/MM/YY' ).format( 'x' ) );
+
       const salidasRef = db.ref( 'salidas' );
       salidasRef.on( 'value', ( snapshot ) => {
         const salidasArr = this.$_( snapshot.val() ) // wrap object so that you can chain lodash methods
           .mapValues( ( value, id ) => this.$_.merge( {}, value, { id } ) ) // attach id to object
           .values() // get the values of the result
           .value(); // unwrap array of objects
+
+        salidasArr.map( ( item ) => {
+          if ( item.fecha ) {
+            item.fechaFormato = this.$moment( item.fecha, 'DD/MM/YYYY' ).format( 'DD/MM/YY' );
+          }
+          else {
+            item.fechaFormato = '-';
+          }
+          return item;
+        } );
 
         this.salidas = salidasArr;
         console.debug( salidasArr );
