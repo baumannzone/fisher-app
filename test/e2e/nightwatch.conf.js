@@ -10,8 +10,8 @@ module.exports = {
   selenium: {
     start_process: false,
     server_path: require('selenium-server').path,
-    host: '127.0.0.1',
-    port: 4444,
+    host: 'ondemand.saucelabs.com',
+    port: 80,
     cli_args: {
       'webdriver.chrome.driver': require('chromedriver').path
     }
