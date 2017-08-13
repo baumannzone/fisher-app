@@ -14,10 +14,10 @@ module.exports = {
       .assert.elementPresent('ul.el-menu')
       .assert.containsText('h1', 'Salidas')
       .assert.elementCount('img', 0)
-      .assert.elementCount('table', 6)
+      //.assert.elementCount('table', 6)
       .url('http://localhost:8080/#/crear')
       .assert.containsText('h1', 'Crear')
-      .assert.containsText('.latlng', '')
+      //.assert.containsText('.latlng', '')
       .end();
   },
 };
