@@ -1,6 +1,6 @@
 language: node_js
 node_js: "6.9.5"
 addons:
-  chrome: stable
-before_install:
-  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+  sauce_connect:
+    username: "baumannq"
+    access_key: "b3d3f32d-86de-4e7f-a520-64c4e89c8652"
