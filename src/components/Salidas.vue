@@ -65,7 +65,7 @@
 
         salidasArr.map( ( item ) => {
           if ( item.fecha ) {
-            item.fechaFormato = this.$moment( item.fecha, 'DD/MM/YYYY' ).format( 'DD/MM/YY' );
+            item.fechaFormato = this.$moment( item.fecha ).format( 'DD/MM/YY' );
           }
           else {
             item.fechaFormato = '-';

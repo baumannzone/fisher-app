@@ -1,0 +1,42 @@
+[debug] [2017-08-13T15:29:35.727Z] ----------------------------------------------------------------------
+[debug] [2017-08-13T15:29:35.730Z] Command:      /Users/rambo/.nvm/versions/node/v6.9.5/bin/node /Users/rambo/.nvm/versions/node/v6.9.5/bin/firebase deploy
+[debug] [2017-08-13T15:29:35.730Z] CLI Version:  3.9.1
+[debug] [2017-08-13T15:29:35.730Z] Platform:     darwin
+[debug] [2017-08-13T15:29:35.730Z] Node Version: v6.9.5
+[debug] [2017-08-13T15:29:35.732Z] Time:         Sun Aug 13 2017 17:29:35 GMT+0200 (CEST)
+[debug] [2017-08-13T15:29:35.732Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-08-13T15:29:35.748Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-08-13T15:29:35.748Z] > authorizing via signed-in user
+[debug] [2017-08-13T15:29:35.752Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2017-08-13T15:29:35.752Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/SNbQLevUFqYsYoyG8rukNYViUhjQIVPgCnby2aLcU9D9LAr0_xqxLfT64YvM12qq',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Sun Aug 13 2017 17:29:35 GMT+0200 (CEST)
+[debug] [2017-08-13T15:29:37.287Z] <<< HTTP RESPONSE 200
+[debug] [2017-08-13T15:29:37.291Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/fisher-app-db138  
+ Sun Aug 13 2017 17:29:37 GMT+0200 (CEST)
+[debug] [2017-08-13T15:29:38.448Z] <<< HTTP RESPONSE 200
+[debug] [2017-08-13T15:29:38.449Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/fisher-app-db138/tokens  
+ Sun Aug 13 2017 17:29:38 GMT+0200 (CEST)
+[debug] [2017-08-13T15:29:39.796Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'fisher-app-db138'...
+[info] 
+[info] i  deploying hosting
+[info] i  hosting: preparing dist directory for upload...
+[debug] [2017-08-13T15:29:43.272Z] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/fisher-app-db138/uploads/-KrRCkvnYDrRNgT7zW-K?fileCount=10&message=  
+ Sun Aug 13 2017 17:29:43 GMT+0200 (CEST)
+[debug] [2017-08-13T15:30:32.925Z] <<< HTTP RESPONSE 200
+[debug] [2017-08-13T15:30:32.926Z] [hosting] .tgz uploaded successfully, waiting for extraction
+[info] ✔  hosting: 10 files uploaded successfully
+[info] i  starting release process (may take several minutes)...
+[debug] [2017-08-13T15:30:38.101Z] >>> HTTP REQUEST POST https://deploy.firebase.com/v1/projects/fisher-app-db138/releases { hosting: 
+   { public: 'dist',
+     rewrites: [ [Object] ],
+     version: '-KrRCkvnYDrRNgT7zW-K',
+     prefix: '-KrRCkvnYDrRNgT7zW-K/',
+     manifest: [] } } 
+ Sun Aug 13 2017 17:30:38 GMT+0200 (CEST)
